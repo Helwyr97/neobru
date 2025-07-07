@@ -1,0 +1,67 @@
+{
+  "name": "neobru",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/neobru.es.js",
+      "require": "./dist/neobru.umd.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build && npm run build:css",
+    "build:css": "npx @tailwindcss/cli -m -i ./src/tailwind-entry.css -o ./dist/styles.css",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "storybook": "concurrently \"npm run storybook:css\" \"storybook dev -p 6006\"",
+    "storybook:css": "npx @tailwindcss/cli -w -i ./src/tailwind-entry.css -o ./src/index.css",
+    "build-storybook": "concurrently \"npm run build-storybook:css\" \"storybook build\"",
+    "build-storybook:css": "npx @tailwindcss/cli -m -i ./src/tailwind-entry.css -o ./src/index.css",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "^4.0.1",
+    "@eslint/js": "^9.29.0",
+    "@storybook/addon-a11y": "^9.0.15",
+    "@storybook/addon-docs": "^9.0.15",
+    "@storybook/addon-onboarding": "^9.0.15",
+    "@storybook/addon-vitest": "^9.0.15",
+    "@storybook/react-vite": "^9.0.15",
+    "@tailwindcss/cli": "^4.1.11",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vitejs/plugin-react": "^4.5.2",
+    "@vitest/browser": "^3.2.4",
+    "@vitest/coverage-v8": "^3.2.4",
+    "concurrently": "^9.2.0",
+    "eslint": "^9.29.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "eslint-plugin-storybook": "^9.0.15",
+    "globals": "^16.2.0",
+    "playwright": "^1.53.2",
+    "storybook": "^9.0.15",
+    "tailwindcss": "^4.1.11",
+    "typescript": "~5.8.3",
+    "typescript-eslint": "^8.34.1",
+    "vite": "^7.0.0",
+    "vite-plugin-dts": "^4.5.4",
+    "vitest": "^3.2.4"
+  },
+  "dependencies": {
+    "@headlessui/react": "^2.2.4",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.525.0"
+  }
+}
