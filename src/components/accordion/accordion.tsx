@@ -36,10 +36,10 @@ const accordionButtonVariants = cva(
   {
     variants: {
       variant: {
-        primary: "bg-[#3300FF] text-white",
-        secondary: "bg-black text-white",
+        primary: "bg-primary text-white",
+        secondary: "bg-secondary text-white",
         outline: "bg-white text-black",
-        danger: "bg-[#FF6B6B] text-white",
+        danger: "bg-danger text-white",
       },
       size: {
         sm: "text-sm",

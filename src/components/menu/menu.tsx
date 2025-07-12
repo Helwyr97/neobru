@@ -15,12 +15,12 @@ const menuItemVariants = cva(
   {
     variants: {
       variant: {
-        default: "hover:bg-[#3300FF] hover:text-white",
+        default: "hover:bg-primary hover:text-white",
         secondary:
-          "hover:bg-black hover:text-white focus:bg-black focus:text-white",
+          "hover:bg-secondary hover:text-white focus:bg-secondary focus:text-white",
         outline: "hover:underline focus:underline",
         danger:
-          "hover:bg-[#FF6B6B] hover:text-white focus:bg-[#FF6B6B] focus:text-white",
+          "hover:bg-danger hover:text-white focus:bg-danger focus:text-white",
       },
       size: {
         sm: "text-sm px-2 py-1",
@@ -38,10 +38,10 @@ const menuItemVariants = cva(
 const focusItemVariants = cva("", {
   variants: {
     variant: {
-      default: "bg-[#3300FF] text-white",
-      secondary: "bg-black text-white",
+      default: "bg-primary text-white",
+      secondary: "bg-secondary text-white",
       outline: "underline",
-      danger: "bg-[#FF6B6B] text-white",
+      danger: "bg-danger text-white",
     },
   },
   defaultVariants: {

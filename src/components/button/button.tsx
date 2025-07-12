@@ -7,10 +7,10 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-[#3300FF] text-white",
-        secondary: "bg-black text-white shadow-[4px_4px_rgba(51,0,255,1)]",
+        default: "bg-primary text-white",
+        secondary: "bg-secondary text-white shadow-[4px_4px_rgba(51,0,255,1)]",
         outline: "text-black bg-white",
-        danger: "bg-[#FF6B6B] text-white",
+        danger: "bg-danger text-white",
       },
       size: {
         sm: "text-sm px-2 py-1",
