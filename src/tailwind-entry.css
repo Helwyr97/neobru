@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap");
 @import "tailwindcss";
 @custom-variant hover (&:hover);
 
@@ -5,4 +6,9 @@
   --color-primary: #3300ff;
   --color-secondary: #000000;
   --color-danger: #ff6b6b;
+  --font-archivo: "Archivo Black", sans-serif;
+}
+
+body {
+  font-family: var(--font-archivo);
 }
