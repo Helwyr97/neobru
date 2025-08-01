@@ -1,13 +1,14 @@
-import { cva, VariantProps } from "class-variance-authority";
-import clsx from "clsx";
+import { cva } from "class-variance-authority";
 import React, { ButtonHTMLAttributes } from "react";
+import { ButtonSizesType, CommonVariantsType } from "../../utils/common-types";
+import { twMerge } from "tailwind-merge";
 
 const buttonVariants = cva(
   "flex items-center border-2 border-black outline-none font-bold shadow-[4px_4px_rgba(0,0,0,1)] duration-200 transition-all",
   {
     variants: {
       variant: {
-        default: "bg-primary text-white",
+        primary: "bg-primary text-white",
         secondary: "bg-secondary text-white shadow-[4px_4px_rgba(51,0,255,1)]",
         outline: "text-black bg-white",
         danger: "bg-danger text-white",
@@ -23,30 +24,27 @@ const buttonVariants = cva(
         false: "cursor-pointer hover:shadow-none hover:translate-y-1",
       },
     },
-    defaultVariants: {
-      variant: "default",
-      size: "md",
-    },
   }
 );
 
-export interface IButtonProps
-  extends ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {}
+export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  size?: ButtonSizesType;
+  variant?: CommonVariantsType;
+}
 
 export const Button = React.forwardRef<HTMLButtonElement, IButtonProps>(
   (
     {
-      children,
+      children = <></>,
       size = "md",
       className = "",
-      variant = "default",
+      variant = "primary",
       disabled = false,
       ...props
     }: IButtonProps,
     forwardedRef
   ) => {
-    const classes = clsx(
+    const classes = twMerge(
       buttonVariants({ variant, size, isDisabled: disabled }),
       className
     );

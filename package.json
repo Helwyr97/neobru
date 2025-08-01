@@ -20,6 +20,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "storybook": "concurrently \"npm run storybook:css\" \"storybook dev -p 6006\"",
+    "storybook-docs": "concurrently \"npm run storybook:css\" \"storybook dev --docs -p 6006\"",
     "storybook:css": "npx @tailwindcss/cli -w -i ./src/tailwind-entry.css -o ./src/index.css",
     "build-storybook": "concurrently \"npm run build-storybook:css\" \"storybook build\"",
     "build-storybook:css": "npx @tailwindcss/cli -m -i ./src/tailwind-entry.css -o ./src/index.css",
@@ -63,6 +64,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.525.0",
-    "react-dropzone": "^14.3.8"
+    "react-dropzone": "^14.3.8",
+    "tailwind-merge": "^3.3.1"
   }
 }

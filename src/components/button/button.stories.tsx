@@ -1,23 +1,27 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Button } from "./button";
 import { Menu } from "lucide-react";
+import { ButtonSizes, CommonVariants } from "../../utils/common-types";
 
 const meta = {
   component: Button,
+  title: "COMPONENTS/Button",
   argTypes: {
     variant: {
-      control: { type: "select" },
-      options: ["default", "secondary", "outline", "danger"],
+      control: { type: "radio" },
+      options: CommonVariants,
     },
     size: {
-      control: { type: "select" },
-      options: ["sm", "md", "lg", "icon"],
+      control: { type: "inline-radio" },
+      options: ButtonSizes,
     },
     disabled: {
-      control: { type: "boolean" },
+      description: "If button is disabled",
+      type: "boolean",
     },
     className: {
-      control: { type: "text" },
+      control: "text",
+      type: "string",
     },
   },
 } satisfies Meta<typeof Button>;
@@ -27,13 +31,22 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    children: "Primary Button",
+    children: (
+      <>
+        <p>Primary Button</p>
+      </>
+    ) as React.ReactNode,
+    className: "bg-[#FFF] p-10",
   },
 };
 
 export const Secondary: Story = {
   args: {
-    children: "Secondary Button",
+    children: (
+      <>
+        <p>Secondary Button</p>
+      </>
+    ),
     variant: "secondary",
   },
 };
