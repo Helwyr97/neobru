@@ -1,16 +1,22 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Accordion } from "./accordion";
+import { ColorSchemes, CommonSizes, Variants } from "../../utils/common-types";
 
 const meta = {
   component: Accordion,
+  title: "COMPONENTS/Accordion",
   argTypes: {
+    colorScheme: {
+      control: { type: "select"},
+      options: ColorSchemes,
+    },
     variant: {
       control: { type: "select" },
-      options: ["primary", "secondary", "outline", "danger"],
+      options: Variants,
     },
     size: {
       control: { type: "select" },
-      options: ["sm", "md", "lg"],
+      options: CommonSizes,
     },
   },
 } satisfies Meta<typeof Accordion>;
@@ -29,7 +35,7 @@ export const Secondary: Story = {
   args: {
     title: "Accordion Title",
     content: "This is the content of the accordion.",
-    variant: "secondary",
+    colorScheme: "secondary",
   },
 };
 
@@ -37,7 +43,7 @@ export const Outline: Story = {
   args: {
     title: "Accordion Title",
     content: "This is the content of the accordion.",
-    variant: "outline",
+    colorScheme: "outline",
   },
 };
 
@@ -45,6 +51,6 @@ export const Danger: Story = {
   args: {
     title: "Accordion Title",
     content: "This is the content of the accordion.",
-    variant: "danger",
+    colorScheme: "danger",
   },
 };
