@@ -3,9 +3,12 @@
 @custom-variant hover (&:hover);
 
 @theme {
-  --color-primary: #3300ff;
+  --color-primary: #FB7DA8;
   --color-secondary: #000000;
-  --color-danger: #ff6b6b;
+  --color-danger: #FD5A46;
+  --color-success: #00995E;
+  --color-warning: #FFC567;
+  --color-info: #058CD7;
   --font-archivo: "Archivo Black", sans-serif;
 }
 
