@@ -1,15 +1,19 @@
-import { cva, VariantProps } from "class-variance-authority";
+import { cva } from "class-variance-authority";
 import { useState } from "react";
+import { ColorSchemesType, CommonSizesType } from "../../utils/common-types";
 
 const checkedVariants = cva(
-  "bg-primary transition-transform duration-300 ease-in-out",
+  "transition-transform duration-300 ease-in-out",
   {
     variants: {
-      variant: {
+      colorScheme: {
         primary: "bg-primary",
         secondary: "bg-secondary",
-        outline: "text-black bg-white",
+        outline: "bg-gray-500",
         danger: "bg-danger",
+        success: "bg-success",
+        warning: "bg-warning",
+        info: "bg-info",
       },
       state: {
         true: "scale-100",
@@ -59,8 +63,8 @@ const labelVariants = cva("", {
 type CheckboxProps = {
   label?: string;
   value?: boolean;
-  variant?: VariantProps<typeof checkedVariants>["variant"];
-  size?: VariantProps<typeof containerVariants>["size"];
+  colorScheme?: ColorSchemesType;
+  size?: CommonSizesType;
   disabled?: boolean;
   onChange?: (value: boolean) => void;
 };
@@ -69,7 +73,7 @@ export const Checkbox = ({
   label = "",
   value,
   onChange,
-  variant = "primary",
+  colorScheme = "primary",
   disabled = false,
   size = "md",
 }: CheckboxProps) => {
@@ -79,7 +83,9 @@ export const Checkbox = ({
 
   const mainClassName = mainVariants({ disabled });
 
-  const checkedClassName = checkedVariants({ variant, state, size });
+  const checkedClassName = checkedVariants({ colorScheme, state, size });
+
+  console.log(checkedClassName);
 
   const containerClassName = containerVariants({ size });
 
