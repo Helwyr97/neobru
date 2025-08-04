@@ -1,17 +1,24 @@
 import { cva } from "class-variance-authority";
 import React, { ButtonHTMLAttributes } from "react";
-import { ButtonSizesType, CommonVariantsType } from "../../utils/common-types";
+import { ButtonSizesType, VariantsType, ColorSchemesType } from "../../utils/common-types";
 import { twMerge } from "tailwind-merge";
 
 const buttonVariants = cva(
-  "flex items-center border-2 border-black outline-none font-bold shadow-[4px_4px_rgba(0,0,0,1)] duration-200 transition-all",
+  "text-black flex items-center border-2 border-black outline-none font-bold shadow-[4px_4px_rgba(0,0,0,1)] duration-200 transition-all",
   {
     variants: {
+      colorScheme: {
+        primary: "bg-primary",
+        secondary: "bg-secondary text-white shadow-[4px_4px_rgba(251,125,168,1)]",
+        outline: "bg-white",
+        danger: "bg-danger",
+        success: "bg-success",
+        warning: "bg-warning",
+        info: "bg-info",
+      },
       variant: {
-        primary: "bg-primary text-white",
-        secondary: "bg-secondary text-white shadow-[4px_4px_rgba(51,0,255,1)]",
-        outline: "text-black bg-white",
-        danger: "bg-danger text-white",
+        rectangular: "",
+        rounded: "rounded-xl"
       },
       size: {
         sm: "text-sm px-2 py-1",
@@ -29,7 +36,8 @@ const buttonVariants = cva(
 
 export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: ButtonSizesType;
-  variant?: CommonVariantsType;
+  colorScheme?: ColorSchemesType
+  variant?: VariantsType;
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, IButtonProps>(
@@ -38,14 +46,15 @@ export const Button = React.forwardRef<HTMLButtonElement, IButtonProps>(
       children = <></>,
       size = "md",
       className = "",
-      variant = "primary",
+      colorScheme = "primary",
+      variant = "rectangular",
       disabled = false,
       ...props
     }: IButtonProps,
     forwardedRef
   ) => {
     const classes = twMerge(
-      buttonVariants({ variant, size, isDisabled: disabled }),
+      buttonVariants({ variant, colorScheme, size, isDisabled: disabled }),
       className
     );
 

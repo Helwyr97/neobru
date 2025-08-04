@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Button } from "./button";
 import { Menu } from "lucide-react";
-import { ButtonSizes, CommonVariants } from "../../utils/common-types";
+import { ButtonSizes, Variants, ColorSchemes} from "../../utils/common-types";
 
 const meta = {
   component: Button,
@@ -9,7 +9,11 @@ const meta = {
   argTypes: {
     variant: {
       control: { type: "radio" },
-      options: CommonVariants,
+      options: Variants,
+    },
+    colorScheme: {
+      control: { type: "select" },
+      options: ColorSchemes,
     },
     size: {
       control: { type: "inline-radio" },
@@ -36,7 +40,6 @@ export const Primary: Story = {
         <p>Primary Button</p>
       </>
     ) as React.ReactNode,
-    className: "bg-[#FFF] p-10",
   },
 };
 
@@ -47,21 +50,21 @@ export const Secondary: Story = {
         <p>Secondary Button</p>
       </>
     ),
-    variant: "secondary",
+    colorScheme: "secondary",
   },
 };
 
 export const Outline: Story = {
   args: {
     children: "Outline Button",
-    variant: "outline",
+    colorScheme: "outline",
   },
 };
 
 export const Danger: Story = {
   args: {
     children: "Danger Button",
-    variant: "danger",
+    colorScheme: "danger",
   },
 };
 
