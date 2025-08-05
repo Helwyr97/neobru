@@ -6,21 +6,35 @@ import {
   MenuItemsProps,
 } from "@headlessui/react";
 import { Button } from "../button";
-import { cva, VariantProps } from "class-variance-authority";
+import { cva } from "class-variance-authority";
 import React from "react";
-import clsx from "clsx";
+import { ButtonSizesType, ColorSchemesType, VariantsType } from "../../utils/common-types";
+import { twMerge } from "tailwind-merge";
 
-const menuItemVariants = cva(
-  "flex items-center cursor-pointer focus:outline-none",
+const menuContainerVariants = cva(
+  "border-2 m-1 outline-none border-black transition duration-200 ease-out origin-top data-closed:scale-95 data-closed:opacity-0",
   {
     variants: {
       variant: {
-        default: "hover:bg-primary hover:text-white",
-        secondary:
-          "hover:bg-secondary hover:text-white focus:bg-secondary focus:text-white",
-        outline: "hover:underline focus:underline",
-        danger:
-          "hover:bg-danger hover:text-white focus:bg-danger focus:text-white",
+        rectangular: "",
+        rounded: "rounded-xl hoverflow-hidden",
+      },
+    },
+  },
+)
+
+const menuItemVariants = cva(
+  "flex items-center cursor-pointer focus:outline-none bg-white",
+  {
+    variants: {
+      colorScheme: {
+        primary: "hover:bg-primary data-focus:bg-primary",
+        secondary: "hover:bg-secondary hover:text-white data-focus:bg-secondary ",
+        outline: "hover:underline data-focus:underline",
+        danger: "hover:bg-danger data-focus:bg-danger",
+        success: "hover:bg-success data-focus:bg-success",
+        warning: "hover:bg-warning data-focus:bg-warning",
+        info: "hover:bg-info data-focus:bg-info",
       },
       size: {
         sm: "text-sm px-2 py-1",
@@ -29,32 +43,30 @@ const menuItemVariants = cva(
         icon: "text-md px-4 py-1.5",
       },
     },
-    defaultVariants: {
-      variant: "default",
-    },
-  }
+  },
 );
 
 const focusItemVariants = cva("", {
   variants: {
-    variant: {
-      default: "bg-primary text-white",
+    colorScheme: {
+      primary: "bg-primary",
       secondary: "bg-secondary text-white",
       outline: "underline",
-      danger: "bg-danger text-white",
+      danger: "bg-danger",
+      success: "bg-success",
+      warning: "bg-warning",
+      info: "bg-info",
     },
-  },
-  defaultVariants: {
-    variant: "default",
   },
 });
 
 type MenuProps = {
   btnContent?: React.ReactNode;
-  variant?: VariantProps<typeof menuItemVariants>["variant"];
-  size?: VariantProps<typeof menuItemVariants>["size"];
+  colorScheme?: ColorSchemesType;
+  size?: ButtonSizesType;
   items: React.ReactNode[];
   anchor?: MenuItemsProps["anchor"];
+  variant?: VariantsType;
 };
 
 type CustomMenuItemProps = {
@@ -62,7 +74,7 @@ type CustomMenuItemProps = {
   children: React.ReactNode;
   onClick?: () => void;
   focus?: boolean;
-  variant?: VariantProps<typeof menuItemVariants>["variant"];
+  colorScheme?: ColorSchemesType;
 };
 
 const CustomMenuItem = ({
@@ -70,9 +82,9 @@ const CustomMenuItem = ({
   children,
   onClick,
   focus = false,
-  variant = "default",
+  colorScheme = "primary",
 }: CustomMenuItemProps) => {
-  const classes = clsx(className, focus ? focusItemVariants({ variant }) : "");
+  const classes = twMerge(className, focus ? focusItemVariants({ colorScheme }) : "");
   return (
     <div className={classes} onClick={onClick}>
       {children}
@@ -82,26 +94,29 @@ const CustomMenuItem = ({
 
 export const Menu = ({
   btnContent = "Menu",
-  variant = "default",
+  colorScheme = "primary",
   size = "md",
   items,
   anchor = "bottom",
+  variant = "rectangular",
 }: MenuProps) => {
-  const menuItemClasses = menuItemVariants({ variant, size });
+  const menuContainerClasses = menuContainerVariants({variant});
+  const menuItemClasses = menuItemVariants({ colorScheme, size });
 
   return (
     <HMenu>
       <MenuButton
         as={Button}
-        variant={variant}
+        colorScheme={colorScheme}
         size={size}
+        variant={variant}
         className="data-active:shadow-none data-active:translate-y-1"
       >
         {btnContent}
       </MenuButton>
       <MenuItems
         anchor={anchor}
-        className="border-2 my-1 outline-none border-black transition duration-200 ease-out origin-top data-closed:scale-95 data-closed:opacity-0"
+        className={menuContainerClasses}
       >
         {items.map((item, index) => (
           <MenuItem key={index}>
@@ -110,7 +125,7 @@ export const Menu = ({
                 className={menuItemClasses}
                 onClick={close}
                 focus={focus}
-                variant={variant}
+                colorScheme={colorScheme}
               >
                 {item}
               </CustomMenuItem>
