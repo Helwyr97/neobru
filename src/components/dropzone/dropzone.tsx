@@ -6,11 +6,12 @@ import {
   FileWithPath,
   useDropzone,
 } from "react-dropzone";
-import { Button } from "../button";
 import { useCallback, useEffect, useState } from "react";
 import { getSimpleMimeIcon, simplifyMimeType } from "../../utils/utils";
 import { X } from "lucide-react";
-import clsx from "clsx";
+import { ButtonSizesType, ColorSchemesType, VariantsType } from "../../utils/common-types";
+import { Button } from "../button";
+import { twMerge } from "tailwind-merge";
 
 type ValidatorType = <T extends File>(
   file: T
@@ -24,12 +25,22 @@ type onDropType = <T extends File>(
 
 type DropzoneTextConfig = {
   info?: string;
-  openBtn?: string;
-  reset?: string;
-  process?: string;
   accepted?: string;
   rejected?: string;
 };
+
+type DropzoneButton = {
+  label: string,
+  variant?: VariantsType,
+  size?: ButtonSizesType,
+  colorScheme?: ColorSchemesType,
+}
+
+type DropzoneButtons = {
+  openFile?: DropzoneButton;
+  reset?: DropzoneButton;
+  process?: DropzoneButton;
+}
 
 type DropzoneProps = {
   accept?: Accept;
@@ -38,8 +49,10 @@ type DropzoneProps = {
   onDrop?: onDropType;
   showFileDialogButton?: boolean;
   mode?: "full" | "simple";
-  textConfig?: DropzoneTextConfig;
+  texts?: DropzoneTextConfig;
   className?: string;
+  buttons?: DropzoneButtons;
+  variant?: VariantsType;
 };
 
 interface FilesState<T extends File> {
@@ -58,12 +71,24 @@ const defaultFileState = {
 
 const defaultTextConfig: DropzoneTextConfig = {
   info: "Drag 'n' drop some files here",
-  openBtn: "Open File Dialog",
-  process: "Process Files",
-  reset: "Reset",
   accepted: "Accepted Files",
   rejected: "Rejected Files",
 };
+
+const defaultButtons: DropzoneButtons = {
+  openFile: {
+    label: "Open File Dialog",
+    colorScheme: "outline",
+  },
+  reset: {
+    label: "Reset",
+    colorScheme: "danger",
+  },
+  process: {
+    label: "Process Files",
+    colorScheme: "success",
+  },
+}
 
 export const Dropzone = ({
   accept,
@@ -72,10 +97,12 @@ export const Dropzone = ({
   onDrop = defaultOnDrop,
   showFileDialogButton = true,
   mode = "simple",
-  textConfig = {},
+  texts = {},
   className = "",
+  buttons = defaultButtons,
+  variant = "rectangular",
 }: DropzoneProps) => {
-  const texts = { ...defaultTextConfig, ...textConfig };
+  const newTexts = { ...defaultTextConfig, ...texts };
 
   const {
     getRootProps,
@@ -112,21 +139,20 @@ export const Dropzone = ({
   return (
     <div
       {...getRootProps()}
-      className={clsx(
+      className={twMerge(
         "border-2 shadow-[4px_4px_rgba(0,0,0,1)] p-2",
         isDragActive && "border-dashed",
+        variant === "rounded" && "rounded-xl hoverflow-hidden",
         className
       )}
     >
       <input {...getInputProps()} />
 
       <div className="flex gap-4 items-center">
-        <p className="font-bold">{texts.info}</p>
-        {showFileDialogButton && (
-          <Button variant="outline" onClick={open}>
-            {texts.openBtn}
-          </Button>
-        )}
+        <p className="font-bold">{newTexts.info}</p>
+        {showFileDialogButton && buttons.openFile && 
+          <Button onClick={open} {...buttons.openFile}>{buttons.openFile.label}</Button>
+        }
       </div>
 
       {files.acceptedFiles && (
@@ -169,15 +195,8 @@ export const Dropzone = ({
 
       {(files.acceptedFiles || files.fileRejections) && mode === "full" && (
         <div className="mt-2 pr-1 flex w-full justify-between">
-          <Button variant="danger" onClick={reset}>
-            {texts.reset}
-          </Button>
-          <Button
-            disabled={files.acceptedFiles === null}
-            onClick={handleProcess}
-          >
-            {texts.process}
-          </Button>
+          {buttons.reset && <Button onClick={reset} {...buttons.reset}>{buttons.reset.label}</Button>}
+          {buttons.process && <Button onClick={handleProcess} {...buttons.process}>{buttons.process.label}</Button>}
         </div>
       )}
     </div>

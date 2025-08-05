@@ -3,6 +3,7 @@ import { Dropzone } from "./dropzone";
 
 const meta = {
   component: Dropzone,
+  title: "COMPONENTS/Dropzone"
   //   argTypes: {
   //     variant: {
   //       control: { type: "select" },
