@@ -4,7 +4,7 @@ import { ColorSchemes, CommonSizes, Variants } from "../../utils/common-types";
 
 const meta = {
   component: Accordion,
-  title: "COMPONENTS/Accordion",
+  title: "Accordion",
   argTypes: {
     colorScheme: {
       control: { type: "select"},

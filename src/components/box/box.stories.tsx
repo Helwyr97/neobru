@@ -4,7 +4,7 @@ import { Variants } from "../../utils/common-types";
 
 const meta = {
   component: Box,
-  title: "COMPONENTS/Box",
+  title: "Box",
   argTypes: {
     variant: {
       control: { type: "select" },

@@ -5,7 +5,7 @@ import { ButtonSizes, ColorSchemes } from "../../utils/common-types";
 
 const meta = {
   component: Menu,
-  title: "COMPONENTS/Menu",
+  title: "Menu",
   argTypes: {
     colorScheme: {
       control: { type: "select" },

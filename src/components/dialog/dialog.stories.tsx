@@ -6,7 +6,7 @@ import { ColorSchemes, CommonSizes, Variants } from "../../utils/common-types";
 
 const meta = {
   component: Dialog,
-  title: "COMPONENTS/Dialog",
+  title: "Dialog",
   argTypes: {
     colorScheme: {
       control: { type: "select" },

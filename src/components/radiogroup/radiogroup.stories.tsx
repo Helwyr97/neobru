@@ -4,7 +4,7 @@ import { ColorSchemes } from "../../utils/common-types";
 
 const meta = {
   component: RadioGroup,
-  title: "COMPONENTS/Radio Group",
+  title: "Radio Group",
   argTypes: {
     colorScheme: {
       control: { type: "select" },

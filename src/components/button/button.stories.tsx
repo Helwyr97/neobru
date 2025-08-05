@@ -5,7 +5,7 @@ import { ButtonSizes, Variants, ColorSchemes} from "../../utils/common-types";
 
 const meta = {
   component: Button,
-  title: "COMPONENTS/Button",
+  title: "Button",
   argTypes: {
     variant: {
       control: { type: "radio" },

@@ -3,23 +3,7 @@ import { Dropzone } from "./dropzone";
 
 const meta = {
   component: Dropzone,
-  title: "COMPONENTS/Dropzone"
-  //   argTypes: {
-  //     variant: {
-  //       control: { type: "select" },
-  //       options: ["default", "secondary", "outline", "danger"],
-  //     },
-  //     size: {
-  //       control: { type: "select" },
-  //       options: ["sm", "md", "lg", "icon"],
-  //     },
-  //     disabled: {
-  //       control: { type: "boolean" },
-  //     },
-  //     className: {
-  //       control: { type: "text" },
-  //     },
-  //   },
+  title: "Dropzone"
 } satisfies Meta<typeof Dropzone>;
 
 export default meta;
