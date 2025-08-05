@@ -1,13 +1,23 @@
-import { cva, VariantProps } from "class-variance-authority";
+import { cva } from "class-variance-authority";
 import { useState } from "react";
+import { ColorSchemesType, CommonSizesType } from "../../utils/common-types";
 
 const checkedVariants = cva(
   "transition-translate duration-500 ease-in-out ml-1 mr-1",
   {
     variants: {
+      colorScheme: {
+        primary: "bg-primary",
+        secondary: "bg-secondary",
+        outline: "bg-gray-500",
+        success: "bg-success",
+        danger: "bg-danger",
+        warning: "bg-warning",
+        info: "bg-info",
+      },
       state: {
         true: "bg-white translate-x-1/5",
-        false: "bg-primary",
+        false: "",
       },
       size: {
         sm: "w-1 h-1",
@@ -35,9 +45,18 @@ const containerVariants = cva("border-2 border-black flex items-center", {
       lg: "w-16 h-8",
     },
     state: {
-      true: "bg-primary justify-end",
-      false: "justify-start",
+      true: "justify-end",
+      false: "bg-white justify-start",
     },
+    colorScheme: {
+      primary: "bg-primary",
+      secondary: "bg-secondary",
+      outline: "bg-gray-500",
+      success: "bg-success",
+      danger: "bg-danger",
+      warning: "bg-warning",
+      info: "bg-info",
+    }
   },
 });
 
@@ -54,9 +73,11 @@ const labelVariants = cva("", {
 type SwitchProps = {
   label?: string;
   value?: boolean;
-  size?: VariantProps<typeof containerVariants>["size"];
+  size?: CommonSizesType;
+  colorScheme?: ColorSchemesType;
   disabled?: boolean;
   onChange?: (value: boolean) => void;
+
 };
 
 export const Switch = ({
@@ -65,6 +86,7 @@ export const Switch = ({
   onChange,
   disabled = false,
   size = "md",
+  colorScheme = "primary"
 }: SwitchProps) => {
   const [state, setState] = useState<boolean>(
     value === undefined ? false : value
@@ -72,9 +94,9 @@ export const Switch = ({
 
   const mainClassName = mainVariants({ disabled });
 
-  const checkedClassName = checkedVariants({ state, size });
+  const checkedClassName = checkedVariants({ colorScheme, state, size });
 
-  const containerClassName = containerVariants({ state, size });
+  const containerClassName = containerVariants({ colorScheme, state, size });
 
   const labelClassName = labelVariants({ size });
 

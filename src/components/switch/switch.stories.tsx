@@ -3,6 +3,7 @@ import { Switch } from "./switch";
 
 const meta = {
   component: Switch,
+  title: "Switch",
 } satisfies Meta<typeof Switch>;
 
 export default meta;
