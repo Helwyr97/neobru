@@ -2,18 +2,24 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Dialog, DialogProps } from "./dialog";
 import { Button } from "../button";
 import { useState } from "react";
+import { ColorSchemes, CommonSizes, Variants } from "../../utils/common-types";
 
 const meta = {
   component: Dialog,
+  title: "COMPONENTS/Dialog",
   argTypes: {
-    variant: {
+    colorScheme: {
       control: { type: "select" },
-      options: ["default", "secondary", "outline", "danger"],
+      options: ColorSchemes,
     },
     size: {
       control: { type: "select" },
-      options: ["sm", "md", "lg"],
+      options: CommonSizes,
     },
+    variant: {
+      control: { type: "select" },
+      option: Variants
+    }
   },
 } satisfies Meta<typeof Dialog>;
 
@@ -30,9 +36,12 @@ const Template: Story = {
           title={args.title}
           isOpen={open}
           onClose={() => setOpen(false)}
-          variant={args.variant}
+          colorScheme={args.colorScheme}
           size={args.size}
-        />
+          variant={args.variant}
+        >
+          {args.children}
+        </Dialog>
       </>
     );
   },
@@ -44,7 +53,13 @@ export const Primary: Story = {
     title: "Dialog Title",
     isOpen: true,
     onClose: () => {},
-    variant: "default",
+    colorScheme: "primary",
     size: "md",
+    variant: "rectangular",
+    children: <>
+      <h1>Children title</h1>
+      <p>Description</p>
+      <footer>footer</footer>
+    </>
   },
 };
