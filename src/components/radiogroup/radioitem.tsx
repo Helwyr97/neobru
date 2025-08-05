@@ -1,14 +1,18 @@
-import { cva, VariantProps } from "class-variance-authority";
+import { cva } from "class-variance-authority";
+import { ColorSchemesType, CommonSizesType } from "../../utils/common-types";
 
 const checkedVariants = cva(
-  "bg-primary rounded-full transition-transform duration-300 ease-in-out",
+  "rounded-full transition-transform duration-300 ease-in-out",
   {
     variants: {
-      variant: {
+      colorScheme: {
         primary: "bg-primary",
         secondary: "bg-secondary",
-        outline: "text-black bg-white",
+        outline: "bg-gray-500",
         danger: "bg-danger",
+        success: "bg-success",
+        warning: "bg-warning",
+        info: "bg-info",
       },
       state: {
         true: "scale-100",
@@ -64,8 +68,8 @@ type RadioItem = {
 
 type RadioItemProps = {
   item: RadioItem;
-  variant?: VariantProps<typeof checkedVariants>["variant"];
-  size?: VariantProps<typeof containerVariants>["size"];
+  colorScheme?: ColorSchemesType;
+  size?: CommonSizesType;
   disabled?: boolean;
   selected?: boolean;
   onClick?: () => void;
@@ -74,14 +78,14 @@ type RadioItemProps = {
 export const RadioItem = ({
   item,
   onClick,
-  variant = "primary",
+  colorScheme = "primary",
   disabled = false,
   size = "md",
   selected = false,
 }: RadioItemProps) => {
   const mainClassName = mainVariants({ disabled });
 
-  const checkedClassName = checkedVariants({ variant, state: selected, size });
+  const checkedClassName = checkedVariants({ colorScheme, state: selected, size });
 
   const containerClassName = containerVariants({ size });
 

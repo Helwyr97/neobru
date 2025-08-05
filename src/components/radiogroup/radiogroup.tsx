@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { RadioItem } from "./radioitem";
+import { ColorSchemesType, CommonSizesType } from "../../utils/common-types";
 
 type RadioItem = {
   value: string | number | object;
@@ -8,15 +9,15 @@ type RadioItem = {
 
 type RadioGroupProps = {
   items: RadioItem[];
-  size?: "sm" | "md" | "lg";
-  variant?: "primary" | "secondary" | "outline" | "danger";
+  size?: CommonSizesType;
+  colorScheme?: ColorSchemesType;
   disabled?: boolean;
 };
 
 export const RadioGroup = ({
   items,
   size = "md",
-  variant = "primary",
+  colorScheme = "primary",
   disabled = false,
 }: RadioGroupProps) => {
   const [selected, setSelected] = useState<RadioItem>();
@@ -28,7 +29,7 @@ export const RadioGroup = ({
           key={`radioitem-${i}`}
           item={item}
           size={size}
-          variant={variant}
+          colorScheme={colorScheme}
           disabled={disabled}
           onClick={() => setSelected(item)}
           selected={selected?.value === item.value}

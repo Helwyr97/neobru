@@ -1,8 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { RadioGroup } from "./radiogroup";
+import { ColorSchemes } from "../../utils/common-types";
 
 const meta = {
   component: RadioGroup,
+  title: "COMPONENTS/Radio Group",
+  argTypes: {
+    colorScheme: {
+      control: { type: "select" },
+      options: ColorSchemes,
+    }
+  }
 } satisfies Meta<typeof RadioGroup>;
 
 export default meta;
