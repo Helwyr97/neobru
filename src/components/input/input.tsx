@@ -15,11 +15,11 @@ const inputVariants = cva(
   }
 );
 
-interface InputProps extends HInputProps {
+export interface IInputProps extends HInputProps {
   variant?: VariantsType;
 }
 
-export const Input = (props: InputProps) => {
+export const Input = (props: IInputProps) => {
   const { className = "", variant = "rectangular", ...rest } = props;
   const classes = twMerge(inputVariants({variant}), className as string);
 

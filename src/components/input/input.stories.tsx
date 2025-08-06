@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Input } from "./input";
+// @ts-expect-error: need dependency to compile
+import { Input, IInputProps} from "./input";
 
 const meta = {
   component: Input,
