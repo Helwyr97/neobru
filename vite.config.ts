@@ -15,9 +15,11 @@ export default defineConfig({
     lib: {
       entry: "./src/index.ts",
       name: "neobru",
-      fileName: (format) => `neobru.${format}.js`,
-      formats: ["es", "cjs", "umd"],
+      fileName: (format) => `index.${format}.js`,
+      formats: ["cjs", "es"],
     },
+    sourcemap: true,
+    emptyOutDir: true,
     rollupOptions: {
       external: Object.keys(peerDependencies),
       output: { globals: { react: "React", "react-dom": "ReactDOM" } },

@@ -4,15 +4,11 @@
     "registry": "https://npm.pkg.github.com/Helwyr97"
   },
   "private": false,
-  "version": "0.0.2",
+  "version": "0.0.3",
   "type": "module",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/neobru.es.js",
-      "require": "./dist/neobru.umd.js"
-    }
-  },
   "files": [
     "dist"
   ],
